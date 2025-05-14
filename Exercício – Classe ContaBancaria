@@ -1,0 +1,67 @@
+class ContaBancaria {
+    private int numeroConta;
+    private String titular;
+    private double saldo;
+
+    public ContaBancaria(int numeroConta, String titular, double saldoInicial) {
+        this.numeroConta = numeroConta;
+        this.titular = titular;
+        this.saldo = saldoInicial;
+    }
+    public int getNumeroConta() {
+      return numeroConta;
+  }
+
+  public void setNumeroConta(int numeroConta) {
+      this.numeroConta = numeroConta;
+  }
+
+  public String getTitular() {
+      return titular;
+  }
+
+  public void setTitular(String titular) {
+      this.titular = titular;
+  }
+
+  public double getSaldo() {
+      return saldo;
+  }
+
+  public void depositar(double valor) {
+      if (valor > 0) {
+          saldo += valor;
+      }
+  }
+
+  public boolean sacar(double valor) {
+      if (valor > 0 && valor <= saldo) {
+          saldo -= valor;
+          return true;
+      }
+      return false;
+  }
+}
+
+
+public class Main {
+  public static void main(String[] args) {
+      ContaBancaria c1 = new ContaBancaria(1001, "Ana Silva", 400.0);
+      System.out.printf("Saldo inicial (c1): R$%.2f\n", c1.getSaldo());
+      c1.depositar(170.0);
+      System.out.printf("Após depósito de R$150: R$%.2f\n", c1.getSaldo());
+      boolean ok = c1.sacar(700.0);
+      System.out.println("Tentativa de saque de R$900: " + (ok ? "sucesso" : "falha"));
+      System.out.printf("Saldo final (c1): R$%.2f\n", c1.getSaldo());
+
+      System.out.println();
+
+      ContaBancaria c2 = new ContaBancaria(1002, "Carlos Souza", 1220.0);
+      System.out.printf("Saldo inicial (c2): R$%.2f\n", c2.getSaldo());
+      c2.depositar(400.0);
+      System.out.printf("Após depósito de R$300: R$%.2f\n", c2.getSaldo());
+      boolean ok2 = c2.sacar(200.0);
+      System.out.println("Tentativa de saque de R$200: " + (ok2 ? "sucesso" : "falha"));
+      System.out.printf("Saldo final (c2): R$%.2f\n", c2.getSaldo());
+  }
+}
